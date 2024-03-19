@@ -1,0 +1,3 @@
+[console_scripts]
+usb_controller_node = my_usb_controller_pkg.usb_controller_node:main
+
