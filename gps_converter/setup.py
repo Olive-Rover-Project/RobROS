@@ -21,7 +21,9 @@ setup(
     entry_points={
         'console_scripts': [
             'gps_converter_node = gps_converter.gps_converter_node:main',
-            'increment_goal_node = gps_converter.increment_goal_node:main'
+            'increment_goal_node = gps_converter.increment_goal_node:main',
+            'initial_position_averager = gps_converter.initial_position_averager:main',
+            'rover_initialiser = gps_converter.rover_initialiser:main',
         ],
     },
 )

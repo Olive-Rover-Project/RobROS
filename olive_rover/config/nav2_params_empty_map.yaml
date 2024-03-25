@@ -47,7 +47,6 @@ bt_navigator:
     odom_topic: /odom
     bt_loop_duration: 10
     default_server_timeout: 20
-    #default_nav_to_pose_bt_xml: "/home/vboxuser/ros2_ws/src/olive_rover/config/navigate_to_pose_w_replanning_and_recovery.xml"
     # 'default_nav_through_poses_bt_xml' and 'default_nav_to_pose_bt_xml' are use defaults:
     # nav2_bt_navigator/navigate_to_pose_w_replanning_and_recovery.xml
     # nav2_bt_navigator/navigate_through_poses_w_replanning_and_recovery.xml
@@ -233,20 +232,18 @@ global_costmap:
       robot_base_frame: base_link
       use_sim_time: True
       robot_radius: 0.22
-      resolution: 0.1  # Assuming your custom map uses a resolution of 0.1m/pixel
-      track_unknown_space: false  # If you want to track unknown space, else set to false
+      resolution: 1.0 #Try increasing later
+      track_unknown_space: false
       always_send_full_costmap: True
-      width: 4000  # 400m at 0.1 px/m
-      height: 3000
-      origin_x: 0.0  # Adjust if your map's origin in UTM coordinates isn't (0,0)
-      origin_y: 0.0  # Adjust if your map's origin in UTM coordinates isn't (0,0)
-      plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
-      
-      static_layer:
-        map_topic: "/static_map"
-        plugin: "nav2_costmap_2d::StaticLayer"
-        yaml_filename: "/home/vboxuser/ros2_ws/src/olive_rover/config/map.yaml"  # Path to your costmap YAML file
+      width: 500  # Covering from -250 to 250
+      height: 500  # Covering from -250 to 250
+      origin_x: -250.0  # Setting the origin to -250 on the x-axis
+      origin_y: -250.0  # Setting the origin to -250 on the y-axis
+      plugins: ["obstacle_layer", "inflation_layer"]
+      # Plugin configurations remain the same...
 
+      # Removed static_layer to avoid being limited by the SLAM map's current extent
+      
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
         enabled: True
@@ -265,7 +262,7 @@ global_costmap:
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 3.0
-        inflation_radius: 0.1
+        inflation_radius: 0.55
 
 map_server:
   ros__parameters:

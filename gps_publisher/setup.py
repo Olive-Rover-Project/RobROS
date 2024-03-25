@@ -20,7 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'gps_pub_node = gps_publisher.gps_pub_node:main'
+            'gps_pub_node = gps_publisher.gps_pub_node:main',
+            'glanderson_example_gps_pub_node = gps_publisher.glanderson_example_gps_pub_node:main',
         ],
     },
 )
